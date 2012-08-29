@@ -1,15 +1,15 @@
 Life 1970.
 ====
-Implemented in javascript as a pet project.
-See [wikipedia](http://en.wikipedia.org/wiki/Conway's_Game_of_Life) for more info on this game.
+Implemented in javascript as a pet project.  
+See [wikipedia](http://en.wikipedia.org/wiki/Conway's_Game_of_Life) for more info on this game.  
 
-Goals of this project:
+__Goals of this project:__
 
-* Use TDD
+* Use TDD (or better yet RDD)
 * Use javascript for code and jQuery for animation etc
 * Make a beautifully looking, simple featured, full fledge implementation of Life
 
-Features:
+__Features:__
 
 * Play/pause button
 * Speed slider
@@ -17,7 +17,6 @@ Features:
 * Presets with colonies to start with
 * Can edit game at any step in paused mode by clicking on the cells
 
-What it is NOT:
+__What it is NOT:__
 
 * There is no intention to optimise code for large-scale fields.
-* This is not a simulator to be used if you love the game. It is a toy for 2 minutes.
