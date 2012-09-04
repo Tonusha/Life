@@ -33,9 +33,11 @@
             });
             $("#play").click(function () {
                 Life.play();
+                return false;
             });
             $("#pause").click(function () {
                 clearTimeout(Life.timeout);
+                return false;
             });
 
 
