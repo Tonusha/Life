@@ -8,7 +8,15 @@
     <script type="text/javascript" src="lib/jquery-ui-1.8.23.custom.min.js"></script>
     <script type="text/javascript" src="lib/life.js"></script>
     <script type="text/javascript">
+        Life.patternHooker = function (pattern) {
+            clearTimeout(Life.timeout);
+            Life.addPattern(pattern);
+            return false;
+        };
+
         $(function () {
+            Life.width = 25;
+            Life.height = 17;
             var defaultSpeed = 3;
             var setSpeed = function (val) {
                 $("#speed").html("1&nbsp;/&nbsp;" + Math.pow(2, val) + "&nbsp;s");
@@ -25,11 +33,12 @@
                 }});
             setSpeed(defaultSpeed);
 
-            Life.initMatrix(17, 10);
+            Life.initMatrix(Life.width, Life.height);
 
             document.getElementById("life").appendChild(Life.table);
             $("#clear").click(function () {
-//                Life.initMatrix(17, 10);
+                Life.clearMatrix();
+                return false;
             });
             $("#play").click(function () {
                 Life.play();
@@ -39,6 +48,7 @@
                 clearTimeout(Life.timeout);
                 return false;
             });
+
 
 
         });
@@ -54,12 +64,11 @@
             margin-left: auto;
             margin-right: auto;
             width: 80%;
-            /*text-align: center;*/
         }
 
         .live, .dead {
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
         }
 
         .live {
@@ -68,6 +77,24 @@
 
         .dead {
             background-color: transparent;
+        }
+
+        .softlink {
+            text-decoration: none;
+            border-bottom: 1px dotted;
+        }
+
+        .dropshadow {
+            padding: 5px;
+            border: solid 0.1em #EFEFEF;
+        }
+
+        a:hover img.dropshadow {
+            border: solid 0.1em #919191;
+            cursor: pointer;
+            /*-moz-box-shadow: 2px 2px 2px #999;*/
+            /*-webkit-box-shadow: 2px 2px 2px #999;*/
+            box-shadow: 0 0 1em black;
         }
 
         #speedSlider {
@@ -84,6 +111,10 @@
 
         table.life {
             border-collapse: collapse;
+        }
+
+        .hidden {
+            display: none;
         }
 
         table.life tr:first-child td {
@@ -113,15 +144,17 @@
 </head>
 <body>
 <div class="description"><h1>Game of Life 1970</h1>
+
     <div style="font-family: 'Enriqueta', serif;">
         <ul>
-            <li>Rules of the game are:
-                <ol>
+            <li>Rules of the game <a href="#" class="softlink"
+                                     onclick="$(document.getElementById('rules')).toggleClass('hidden');return false;">are</a>:
+                <ol class="hidden" id="rules">
                     <li>Any live cell with fewer than two live neighbours dies, as if caused by under-population.</li>
                     <li>Any live cell with two or three live neighbours lives on to the next generation.</li>
                     <li>Any live cell with more than three live neighbours dies, as if by overcrowding.</li>
-                    <li>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.</li>
-
+                    <li>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+                    </li>
                 </ol>
             </li>
             <li>Select any of the presets below and click «Play».</li>
@@ -144,7 +177,13 @@
             <a href="#" id="play">Play</a>
             <a href="#" id="pause">Pause</a>
             <a href="#" id="clear">Clear</a>
-            <a href="#">Matrix2</a>
+            <a id="pattern1" onclick="return Life.patternHooker([[1,1,1]])"><img src="img/1.png" class="dropshadow"></a>
+            <a id="pattern2"><img src="img/2.png" class="dropshadow"></a>
+            <a id="pattern3"><img src="img/3.png" class="dropshadow"></a>
+            <a id="pattern4"><img src="img/4.png" class="dropshadow"></a>
+            <a id="pattern5"><img src="img/5.png" class="dropshadow"></a>
+            <a id="pattern6"><img src="img/6.png" class="dropshadow"></a>
+            <a id="pattern7"><img src="img/7.png" class="dropshadow"></a>
 
             <div id="life"></div>
         </td>

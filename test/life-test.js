@@ -250,5 +250,75 @@ buster.testCase("A function changeCell:", {
     }
 });
 
+buster.testCase("A function clearMatrix:", {
+    setUp:function () {
+        this.stub(Life, "updateGrid");
+        Life.matrix = [
+            [1, 1],
+            [1, 1]
+        ];
+    },
 
+    "makes every cell == to zero":function () {
+        assert(Array.prototype.slice.call(Life.matrix).every(function (row) {
+            return Array.prototype.slice.call(row).every(function (cell) {
+                if (cell === 1) {
+                    return true;
+                }
+            });
+        }));
+        Life.clearMatrix();
+        assert(Array.prototype.slice.call(Life.matrix).every(function (row) {
+            return Array.prototype.slice.call(row).every(function (cell) {
+                if (cell === 0) {
+                    return true;
+                }
+            });
+        }));
+    },
+    "calls updateGrid()":function () {
+        Life.clearMatrix();
+        assert.called(Life.updateGrid);
+    }
+});
+
+
+buster.testCase("A function addPattern:", {
+    setUp:function () {
+        this.stub(Life, "updateGrid");
+
+        Life.pattern = [
+            [1, 0],
+            [0, 1]
+        ];
+        Life.matrix = [
+            [1, 1, 1],
+            [1, 1, 1],
+            [1, 1, 1]
+        ];
+    },
+    "calls updateGrid()":function () {
+        Life.addPattern(Life.pattern);
+        assert.called(Life.updateGrid);
+    },
+    "calls clearMatrix()":function () {
+        this.stub(Life, "clearMatrix");
+        Life.addPattern(Life.pattern);
+        assert.called(Life.clearMatrix);
+    },
+    "Throws exception if non array given as a parameter":function () {
+        assert.exception(function () {
+            Life.addPattern('d');
+        });
+        assert.exception(function () {
+            Life.addPattern(1);
+        });
+    },
+    " adds as many live cells to matrix as necessary":function () {
+        Life.addPattern(Life.pattern);
+        assert.equals(Life.matrix.reduce(function (a, b) {
+            return a + b.reduce(function (a,b) {return a+b;});
+        },0),2);
+    }
+});
 
