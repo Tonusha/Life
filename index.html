@@ -9,7 +9,7 @@
     <script type="text/javascript" src="lib/life.js"></script>
     <script type="text/javascript">
         Life.patternHooker = function (pattern) {
-            clearTimeout(Life.timeout);
+            Life.pause();
             Life.addPattern(pattern);
             return false;
         };
@@ -45,7 +45,7 @@
                 return false;
             });
             $("#pause").click(function () {
-                clearTimeout(Life.timeout);
+                Life.pause();
                 return false;
             });
 
@@ -146,8 +146,8 @@
 
     <div style="font-family: 'Enriqueta', serif;">
         <ul>
-            <li>Rules of the game <a href="#" class="softlink"
-                                     onclick="$(document.getElementById('rules')).toggleClass('hidden');return false;">are</a>:
+            <li>Read the <a href="#" class="softlink"
+                                     onclick="$(document.getElementById('rules')).toggleClass('hidden');return false;">rules</a>:
                 <ol class="hidden" id="rules">
                     <li>Any live cell with fewer than two live neighbours dies, as if caused by under-population.</li>
                     <li>Any live cell with two or three live neighbours lives on to the next generation.</li>
@@ -158,40 +158,56 @@
             </li>
             <li>Select any of the presets below and click «Play».</li>
             <li>Adjust speed slider on the left.</li>
-            <li>Stop simulation and draw your own matrix by clicking on the cells of the table.</li>
-            <li>Save your matrix for future use by clicking «Save».</li>
+            <li>Draw your own matrix by clicking on the cells of the table.</li>
         </ul>
     </div>
 
 </div>
+      <div align="center"><a id="pattern1" onclick="return Life.patternHooker([[1,1,1]])"><img src="img/1.png" class="dropshadow"></a>
+          <a id="pattern2" onclick="return Life.patternHooker([[0,1,1,1],[1,1,1,0]])"><img src="img/2.png"
+                                                                                           class="dropshadow"></a>
+          <a id="pattern5" onclick="return Life.patternHooker([[0,0,1,1],[0,0,1,1],[1,1,0,0],[1,1,0,0]])"><img
+                  src="img/5.png" class="dropshadow"></a>
 
-<table class="container">
-    <tr>
-        <td>
-
-            <div id="speedSlider" style="height: 400px;"></div>
-            <p style="width: 6em; text-align: center;"><label id="speed"></label></p>
-        </td>
-        <td>
-            <a href="#" id="play">Play</a>
-            <a href="#" id="pause">Pause</a>
-            <a href="#" id="clear">Clear</a>
-            <a id="pattern1" onclick="return Life.patternHooker([[1,1,1]])"><img src="img/1.png" class="dropshadow"></a>
-            <a id="pattern2" onclick="return Life.patternHooker([[0,1,1,1],[1,1,1,0]])"><img src="img/2.png" class="dropshadow"></a>
-            <a id="pattern5"><img src="img/5.png" class="dropshadow"></a>
-            <a id="pattern4"><img src="img/4.png" class="dropshadow"></a>
-            <a id="pattern3" onclick="return Life.patternHooker([
+          <a id="pattern4" onclick="return Life.patternHooker([[0,1,0],[0,0,1],[1,1,1]])"><img src="img/4.png"
+                                                                                               class="dropshadow"></a>
+          <a id="pattern3" onclick="return Life.patternHooker([
     [0, 1, 1, 0, 0],
     [1, 1, 1, 1, 0],
     [1, 1, 0, 1, 1],
     [0, 0, 1, 1, 0]
-])">
-                <img src="img/3.png" class="dropshadow"></a>
-            <a id="pattern6"><img src="img/6.png" class="dropshadow"></a>
+])"><img src="img/3.png" class="dropshadow"></a>
+          <a id="pattern6" onclick="return Life.patternHooker([
+    [0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0],
+    [1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
+    [1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1],
+    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0],
+    [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
+    [1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1],
+    [1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1],
+    [0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0]
+])"><img src="img/6.png" class="dropshadow"></a></div>
+<div align="center" style="font-size: 5em"><a href="#" id="play">Play</a>
+    <a href="#" id="pause" class="hidden">Pause</a></div>
+<table class="container">
+    <tr>
+        <td>
+
+            <div align="center">Speed:</div><div id="speedSlider" style="height: 400px;"></div><div align="center"><a href="#" id="clear" class="hidden">Clear</a></div>
+            <p style="width: 6em; text-align: center;"><label id="speed"></label></p>
+        </td>
+        <td>
+
             <div id="life"></div>
         </td>
     </tr>
 </table>
+<div style="height: 5em"></div>
 
 </body>
 </html>

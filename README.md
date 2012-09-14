@@ -7,7 +7,7 @@ __Goals of this project:__
 
 * Use TDD (or better yet RDD)
 * Use javascript for code and jQuery for animation etc
-* Make a beautifully looking, simple featured, full fledge implementation of Life
+* Make a fresh looking, simple featured, complete implementation of Life.
 
 __Features:__
 
@@ -15,7 +15,7 @@ __Features:__
 * Speed slider
 * Cells change animation
 * Presets with colonies to start with
-* Can edit game at any step in paused mode by clicking on the cells
+* Ability to edit game at any step in paused mode by clicking on the cells
 
 __What it is NOT:__
 
