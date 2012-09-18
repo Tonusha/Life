@@ -18,13 +18,14 @@
         $(function () {
             Life.width = 25;
             Life.height = 17;
-            var defaultSpeed = 3;
+            var defaultSpeed = 1;
             var setSpeed = function (val) {
                 $("#speed").html("1&nbsp;/&nbsp;" + Math.pow(2, val) + "&nbsp;s");
                 Life.speed = 1000 / (Math.pow(2, val));
             };
             $("#speedSlider").slider({
                 orientation:"vertical",
+                range: "min",
                 min:1,
                 step:1,
                 max:10,
@@ -55,6 +56,10 @@
     </script>
     <link rel="stylesheet" href="css/flick/jquery-ui-1.8.23.custom.css" type="text/css" media="all"/>
     <style type="text/css">
+        #play:hover, #pause:hover {
+            font-weight: bolder;
+        }
+
         body {
             font-family: 'Sofia', cursive;
         }
@@ -95,6 +100,9 @@
             /*-moz-box-shadow: 2px 2px 2px #999;*/
             /*-webkit-box-shadow: 2px 2px 2px #999;*/
             box-shadow: 0 0 1em black;
+        }
+        a {
+            color:  #ADFF2F ;
         }
 
         #speedSlider {
